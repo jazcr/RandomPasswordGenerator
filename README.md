@@ -14,3 +14,5 @@ This is a tool that generates a random password for you. You must choose between
 
 After choosing the length and desired criteria, a randomly generated password will appear in the box.
 
+
+![Screenshot of application](https://github.com/jazcr/RandomPasswordGenerator/blob/f427f76fa794e1eb3eddc212abed0857c604cde0/screenshot.JPG "screenshot")
