@@ -4,7 +4,6 @@ var passLength;
 var getLowerLtr;
 var getUpperLtr;
 var getRanNum;
-var getSpecChar = ["!@#$%^&*_+=?><?"];
 var userChoices;
 
 const ranFunction = {
@@ -18,27 +17,27 @@ symbol: getSpecChar
 
 
 //Generating lowercase letters
-function getLowerLtr() {
+function getLowerLtr(lower) {
 	return String.fromCharCode(Math.floor(Math.random() * 26) + 97);  
 }
 
 
 //Generating upercase letters
-function getUpperLtr() {
+function getUpperLtr(upper) {
 	return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 }
 
 
 //Generating random numbers
 
-function getRanNum() {
+function getRanNum(num) {;
 	return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
 }
 
 
 //Generating random symbol
-function getSpecChar() {
-	const symbols = '!@#$%^&*_+=?<>'
+function getSpecChar(symbols) {
+	const spec = ["!","@","#","$","%","^","&","*","_","+","=","?","<",">",];
 	return String(Math.floor(Math.random() * symbols.length));
 }
 
@@ -82,42 +81,51 @@ if ( !getLowerLtr && !getUpperLtr && !getRanNum && !getSpecChar ) {
 
   // All criteria chosen
   else if ( getLowerLtr && getUpperLtr && getRanNum && getSpecChar ) {
-  userChoices = getLowerLtr.concat(getUpperLtr, getRanNum);
+  userChoices = lower.concat(upper, num, symbols);
   }
 
 
   // 3 out of 4 criteria chosen
   else if ( getLowerLtr && getUpperLtr && getSpecChar ) {
-    userChoices = getLowerLtr.concat(getUpperLtr, getSpecChar);
+    var lower = getLowerLtr();
+    userChoices = lower.concat(getUpperLtr, getSpecChar);
   }
 
   else if ( getLowerLtr && getUpperLtr && getRanNum) {
-    userChoices = getLowerLtr.concat(getUpperLtr, getRanNum)
+    var lower = getLowerLtr();
+    userChoices = lower.concat(getUpperLtr, getRanNum)
   }
 
   else if ( getUpperLtr && getRanNum && getSpecChar) {
-    userChoices = getUpperLtr.concat(getRanNum, getSpecChar);
+    var upper = getUpperLtr();
+    userChoices = upper.concat(getRanNum, getSpecChar);
   }
 
 
   // 2 out of 4 criteria chosen
   else if ( getLowerLtr && getUpperLtr ) {
-    userChoices = getLowerLtr.concat(getUpperLtr)
+    var lower = getLowerLtr();
+    userChoices = lower.concat(getUpperLtr)
   }
   else if ( getLowerLtr && getRanNum ) {
-    userChoices = getLowerLtr.concat(getRanNum)
+    var lower = getLowerLtr();
+    userChoices = lower.concat(getRanNum)
   }
   else if ( getLowerLtr && getSpecChar ) {
-    userChoices = getLowerLtr.concat(getSpecChar)
+    var lower = getLowerLtr();
+    userChoices = lower.concat(getSpecChar)
   }
   else if ( getUpperLtr && getRanNum ) {
-    userChoices = getUpperLtr.concat(getRanNum)
+    var lower = getLowerLtr();
+    userChoices = lower.concat(getRanNum)
   }
   else if ( getUpperLtr && getSpecChar ) {
-    userChoices = getUpperLtr.concat(getSpecChar)
+    var upper = getUpperLtr();
+    userChoices = upper.concat(getSpecChar)
   }
   else if ( getRanNum && getSpecChar ) {
-    userChoices = getRanNum.concat(getSpecChar)
+    var num = getRanNum();
+    userChoices = num.concat(getSpecChar)
   }
 
 
@@ -137,11 +145,11 @@ if ( !getLowerLtr && !getUpperLtr && !getRanNum && !getSpecChar ) {
 
 };
 
+var password = [];
 
+for (var i = 0; i < passLength; i++) {
+  var userInput = userChoices[Math.floor(Math.random() * userChoices.length)];
+  password.push(userInput);
 
-
-
-// if (getLowerLtr && getUpperLtr && getRanNum && getSpecChar){
-//    getLowerLtr.concat(getUpperLtr, getRanNum, getSpecChar);
-//passlLength $$ }
+}
 
