@@ -7,19 +7,25 @@ var getRanNum;
 var getSpecChar = ["!@#$%^&*_+=?><?"];
 var userChoices;
 
+const ranFunction = {
+
+length: passLength,
+lower: getLowerLtr,
+upper: getUpperLtr,
+number: getRanNum,
+symbol: getSpecChar
+}
 
 
-// //Generating lowercase letters
+//Generating lowercase letters
 function getLowerLtr() {
-	return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-  getLowerLtr = lower;
+	return String.fromCharCode(Math.floor(Math.random() * 26) + 97);  
 }
 
 
 //Generating upercase letters
 function getUpperLtr() {
 	return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-  getUpperLtr = upper;
 }
 
 
@@ -27,15 +33,13 @@ function getUpperLtr() {
 
 function getRanNum() {
 	return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-  getRanNum = num;
 }
 
 
-//Generating randomsymbol
+//Generating random symbol
 function getSpecChar() {
 	const symbols = '!@#$%^&*_+=?<>'
-	return symbols[Math.floor(Math.random() * symbols.length)];
-  getSpecChar = symbols;
+	return String(Math.floor(Math.random() * symbols.length));
 }
 
 
@@ -52,11 +56,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// get.addEventListener("click", () => {
-//     pw = generatePassword();
-//     document.querySelector("#password").placeholder = pw;
-// });
 
 // Start function to generate password
 function generatePassword() {
@@ -75,15 +74,72 @@ function generatePassword() {
        getSpecChar = confirm("Press 'OK' if you'd like to include SPECIAL CHARACTERS. If not, press 'CANCEL'.");
     }
 
+    // Alert if no criteria are chosen
+if ( !getLowerLtr && !getUpperLtr && !getRanNum && !getSpecChar ) {
+  userChoices = alert("At least one criteria must be chosen. Please start over.");
+
+} 
+
+  // All criteria chosen
+  else if ( getLowerLtr && getUpperLtr && getRanNum && getSpecChar ) {
+  userChoices = getLowerLtr.concat(getUpperLtr, getRanNum);
+  }
+
+
+  // 3 out of 4 criteria chosen
+  else if ( getLowerLtr && getUpperLtr && getSpecChar ) {
+    userChoices = getLowerLtr.concat(getUpperLtr, getSpecChar);
+  }
+
+  else if ( getLowerLtr && getUpperLtr && getRanNum) {
+    userChoices = getLowerLtr.concat(getUpperLtr, getRanNum)
+  }
+
+  else if ( getUpperLtr && getRanNum && getSpecChar) {
+    userChoices = getUpperLtr.concat(getRanNum, getSpecChar);
+  }
+
+
+  // 2 out of 4 criteria chosen
+  else if ( getLowerLtr && getUpperLtr ) {
+    userChoices = getLowerLtr.concat(getUpperLtr)
+  }
+  else if ( getLowerLtr && getRanNum ) {
+    userChoices = getLowerLtr.concat(getRanNum)
+  }
+  else if ( getLowerLtr && getSpecChar ) {
+    userChoices = getLowerLtr.concat(getSpecChar)
+  }
+  else if ( getUpperLtr && getRanNum ) {
+    userChoices = getUpperLtr.concat(getRanNum)
+  }
+  else if ( getUpperLtr && getSpecChar ) {
+    userChoices = getUpperLtr.concat(getSpecChar)
+  }
+  else if ( getRanNum && getSpecChar ) {
+    userChoices = getRanNum.concat(getSpecChar)
+  }
+
+
+  // 1 out of 4 criteria selected
+  else if (getLowerLtr) {
+    userChoices = getLowerLtr;
+  }
+  else if (getUpperLtr) {
+    userChoices = getUpperLtr;
+  }
+  else if (getRanNum) {
+    userChoices = getRanNum;
+  }
+  else if (getSpecChar) {
+    userChoices = getSpecChar;
+  }
+
 };
 
 
 
-//Alert if no criteria are chosen
-if ( passLength && !getLowerLtr && !getUpperLtr && !getRanNum && !getSpecChar ) {
-  userChoices = alert("At least one criteria must be chosen. Please start over.");
 
-} 
 
 // if (getLowerLtr && getUpperLtr && getRanNum && getSpecChar){
 //    getLowerLtr.concat(getUpperLtr, getRanNum, getSpecChar);
